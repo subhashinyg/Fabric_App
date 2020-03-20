@@ -1,0 +1,10 @@
+name: "fabApp"
+x-type: "hlfv1"
+description: "Fabric-Application client definition for attinad"
+version: "1.0"
+client: 
+  organization: attinad
+  credentialStore:
+    path: "./fabric-client-kv-attinad"
+  cryptoStore:
+    path: "/tmp/fabric-client-kv-attinad"

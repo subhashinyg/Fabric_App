@@ -1,0 +1,103 @@
+name: fabApp
+description: "Fabric Application"
+version: "1.0"
+channels:
+  mychannel:
+    orderers:
+      -orderer.example.com
+    
+    peers:
+
+      peer0.attinad.example.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+
+      peer1.attinad.example.com:
+        endorsingPeer: false
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: false
+
+      peer0.ibm.example.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+
+      peer1.ibm.example.com:
+        endorsingPeer: false
+        chaincodeQuery: true
+        legderQuery: true
+        eventSource: false
+
+      chaincodes:
+        - mychaincode:v0
+
+organization:
+  attinad:
+    mspid: AttinadMSP
+
+    peers:
+      - peer0.attinad.example.com
+      - peer1.attinad.example.com
+
+    certificateAuthorities:
+      - ca-attinad
+    adminprivateKey:
+      path: artifacts/channel/crypto-config/peerOrganizations/attinad.example.com/users/Admin@attinad.example.com/msp/keystore/MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQg3hhcIX0JIpTTClYfLP4+X0lWWVyWAKP1oZhw51hFaCyhRANCAAQGWdZz4WHlEwYnVen7zIP1Qvz7veAZhEbHZjFk7pyoy7d8RFHPPa7wvzTdm3pv1bvQtXAs1zjeU7cdgrCLZ+RS
+    signedCert:
+      path: artifacts/channel/crypto-config/peerOrganization/attinad.example.com/users/Admin@attinad.example.com/msp/signecerts
+
+  ibm:
+    mspid:IbmMSP
+
+    peers:
+      - peer0.ibm.example.com
+      - peer1.ibm.example.com
+
+    certificateAuthorites:
+      - ca-ibm
+    adminPrivateKey:
+      path: artifacts/channel/crypto-config/peerOrganization/ibm.example.com/users/Admin@ibm.example.com/msp/signcerts/admin@ibm.example.com-cert.pem
+
+orderers:
+  orderer.example.com:
+    url: grpc://localhost:7050
+    grpcOptions:
+      ssl-target-name-override: orderer.example.com
+
+    tlsCACerts:
+        path: /artifacts/channel/crypto-config/ordererOrganizations/example.com/orderes/orderer.example.com/tls/ca.crt
+
+peers:
+  peer0.attinad.example.com:
+    url: grpcs://localhost:7051
+
+    grpcOptions:
+      ssl-target-name-override: peer0.attinad.example.com
+    tlsCACerts:
+      path: artifacts/channel/crypto-config/peerOrganizations/attinad.example.com/peers/peer0.attinad.example.com/tls/ca.crt
+
+  peer1.org1.example.com:
+    url: grpcs://localhost:7056
+    grpcOptions:
+      ssl-target-name-override: peer1.ibm.example.com
+    tlsCACerts:
+      path: artifacts/channel/crypto-config/peerOrganizations/attinad.example.com/peers/peer1.attinad.example.com/tls/ca.crt
+
+  peer0.ibm.example.com:
+    url: grpcs://localhost:8051
+    grpcOptions:
+      ssl-target-name-override: peer0.ibm.example.com
+    tlsCACerts:
+      path: artifacts/channel/crypto-config/peerOrganizations/ibm.example.com/peers/peer0.ibm.example.com/tls/ca.crt
+
+  peer1.ibm.example.com:
+    url: grpcs://localhost:8056
+    eventUrl: grpcs://localhost:8058
+    grpcOptions:
+      ssl-target-name-override: peer1.ibm.example.com
+    tlsCACerts:
+      path: artifacts/channel/crypto-config/peerOrganizations/ibm.example.com/peers/peer1.ibm.example.com/tls/ca.crt     

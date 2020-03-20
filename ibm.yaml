@@ -1,0 +1,10 @@
+name: "fabApp"
+x-type: "hlfv1"
+description: "Fabric Application"
+version: "1.0"
+client:
+  organization: ibm
+  credentialStore:
+    path: "./fabric-client-kv-ibm"
+  cryptoStore:
+    path: "/tmp/fabric-client-kv-ibm"
